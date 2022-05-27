@@ -1,0 +1,37 @@
+syntax = "proto3";
+package services;
+option go_package="./;protos";
+
+//数据库结构
+message VedioModel{
+  int64  UId = 1;
+  int64  CommentCount = 2;
+  string CoverURL = 3;
+  int64  FavoriteCount = 4;
+  int64  VID = 5;
+  bool   IsFavorite = 6;
+  string PlayURL = 7;
+  string Title = 8;
+  int64  UploadTime = 9;
+}
+
+// Video 嵌入Resp中的数据
+message Vedio{
+  User   Author = 1;
+  int64  CommentCount = 2;
+  string CoverURL = 3;
+  int64  FavoriteCount = 4;
+  int64  VID = 5;
+  bool   IsFavorite = 6;
+  string PlayURL = 7;
+  string Title = 8;
+}
+
+// User
+message User{
+  int64  FollowCount = 1;      // 关注总数
+  int64  FollowerCount = 2;    // 粉丝总数
+  int64  UID = 3;               // 用户id
+  bool   IsFollow = 4;         // true-已关注，false-未关注
+  string Name = 5;             // 用户名称
+}

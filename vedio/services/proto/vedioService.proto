@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package services;
+import "vedioModels.proto";
+option go_package="./;protos";
+
+//视频流接口
+message VedioStreamReq{
+  int64  Lastest_time = 1; //最新投稿时间戳，不填为当前时间
+  int64  UId = 2;          //用户登录状态下的id
+}
+message VedioStreamResp{
+  int64  Status_code = 1;
+  string Status_msg = 2;
+  int64  NextTime = 3;
+  repeated Vedio VideoList = 4;
+}
+
+//投稿接口
+message PublishReq{
+  bytes data = 1;
+  int64 UId = 2;
+  string Title = 3;
+}
+message PublishResp{
+  int64  Status_code = 1;
+  int64  Status_msg = 2;
+}
+
+//获取发布列表
+message PublishListReq{
+  int64  UId = 1;//被查看用户的ID
+}
+message PublishListResp{
+  int64  Status_code = 1;
+  string Status_msg = 2;
+  repeated Vedio VideoList = 3;
+}
+
+//更改点赞数量
+message FavoriteCountChangeReq{
+  int64 UId = 1;
+  int64 VId = 2;
+  bool  Is_favorite = 3;
+}
+message FavoriteChangeResp{
+  int64  Status_code = 1;
+  string Status_msg = 2;
+}
+
+// 更改评论数量
+message CommentCountChangeReq{
+  int64  UId = 1;
+  int64  VId = 2;
+  bool   Is_Comment = 3;//修改评论数量
+}
+message CommentCountChangeResp{
+  int64  Status_code = 1;
+  string Status_msg = 2;
+}
+
+
+service VedioService{
+  rpc VedioStream(VedioStreamReq) returns(VedioStreamResp);
+  rpc PublishVedio(PublishReq) returns(PublishResp);
+  rpc PublishList(PublishListReq) returns(PublishListResp);
+  rpc FavoriteCountChange(FavoriteCountChangeReq) returns(FavoriteChangeResp);
+  rpc CommentCountChange(FavoriteCountChangeReq) returns(FavoriteChangeResp);
+}
