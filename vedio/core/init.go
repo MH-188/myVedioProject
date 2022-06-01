@@ -20,4 +20,5 @@ func Init() {
 		panic(err)
 	}
 	model.ConnectMysql(conf.ConfigYaml.Mysql.DataSource)
+	model.InitMinIo()
 }

@@ -14,6 +14,9 @@ import (
 )
 
 func TestLoadConfig(t *testing.T) {
-	LoadConfig()
+	err := LoadConfig()
+	if err != nil {
+		fmt.Println(err)
+	}
 	fmt.Println(ConfigYaml)
 }
